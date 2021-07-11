@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -49,12 +50,31 @@ public class Main {
             }
             System.out.println();
 
-            String direction = sn.nextLine();
-
-            if(exits.containsKey(direction)){
-                loc = exits.get(direction);
-            }else{
-                System.out.println("you cant go in that direction");
+            String[] d = sn.nextLine().split(" ");
+            String direction = d[d.length-1].toLowerCase();
+            switch (direction){
+                case "east":
+                    if(exits.containsKey("E")){
+                        loc = exits.get("E");
+                    }
+                    break;
+                case "west":
+                    if(exits.containsKey("W")){
+                        loc = exits.get("W");
+                    }
+                    break;
+                case "south":
+                    if(exits.containsKey("S")){
+                        loc = exits.get("S");
+                    }
+                    break;
+                case "north":
+                    if(exits.containsKey("N")){
+                        loc = exits.get("N");
+                    }
+                    break;
+                default:
+                    System.out.println("You cant go in that direction");
             }
         }
 
