@@ -35,6 +35,12 @@ public class Main {
         locations.get(5).addExits("S",1);
         locations.get(5).addExits("W",2);
 
+        Map<String,String> voc = new HashMap<>();
+        voc.put("NORTH","N");
+        voc.put("SOUTH","S");
+        voc.put("EAST","E");
+        voc.put("WEST","W");
+        voc.put("QUIT","Q");
 
 
         int loc=1;
@@ -50,32 +56,26 @@ public class Main {
             }
             System.out.println();
 
+            String direction="";
             String[] d = sn.nextLine().split(" ");
-            String direction = d[d.length-1].toLowerCase();
-            switch (direction){
-                case "east":
-                    if(exits.containsKey("E")){
-                        loc = exits.get("E");
+            if(d.length>1){
+                for(String s : d){
+                    if(voc.containsKey(s.toUpperCase(Locale.ROOT))){
+                        direction = voc.get(s.toUpperCase(Locale.ROOT));
+                        break;
                     }
-                    break;
-                case "west":
-                    if(exits.containsKey("W")){
-                        loc = exits.get("W");
-                    }
-                    break;
-                case "south":
-                    if(exits.containsKey("S")){
-                        loc = exits.get("S");
-                    }
-                    break;
-                case "north":
-                    if(exits.containsKey("N")){
-                        loc = exits.get("N");
-                    }
-                    break;
-                default:
-                    System.out.println("You cant go in that direction");
+                }
             }
+
+            if(exits.containsKey(direction)){
+                loc=exits.get(direction);
+            }
+            else{
+                System.out.println("You cant go in that direction");
+            }
+
+
+//
         }
 
     }
